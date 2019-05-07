@@ -1,0 +1,175 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "diagnosticSettingsName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "An diagnostic settings object for the body of patch operations.",
+            "properties": {
+                "properties": {
+                    "description": "The diagnostic settings for an update operation.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "dataSources": {
+                            "description": "the array of data source object which are configured to collect and send data",
+                            "items": {
+                                "description": "Data source object contains configuration to collect telemetry and one or more sinks to send that telemetry data to",
+                                "properties": {
+                                    "configuration": {
+                                        "type": "object",
+                                        "properties": {
+                                            "eventLogs": {
+                                                "description": "Windows event logs configuration.",
+                                                "items": {
+                                                    "properties": {
+                                                        "filter": {
+                                                            "type": "string"
+                                                        },
+                                                        "logName": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "logName"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "perfCounters": {
+                                                "description": "Performance counter configuration",
+                                                "items": {
+                                                    "properties": {
+                                                        "instance": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "samplingPeriod": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name",
+                                                        "samplingPeriod"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "providers": {
+                                                "description": "ETW providers configuration",
+                                                "items": {
+                                                    "properties": {
+                                                        "events": {
+                                                            "items": {
+                                                                "properties": {
+                                                                    "filter": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "id": {
+                                                                        "type": "integer"
+                                                                    },
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "name",
+                                                                    "id"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "id": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "events"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            }
+                                        }
+                                    },
+                                    "kind": {
+                                        "description": "Datasource kind",
+                                        "enum": [
+                                            "PerformanceCounter",
+                                            "ETWProviders",
+                                            "WindowsEventLogs"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "sinks": {
+                                        "items": {
+                                            "properties": {
+                                                "kind": {
+                                                    "enum": [
+                                                        "EventHub",
+                                                        "ApplicationInsights",
+                                                        "LogAnalytics"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "kind"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "kind",
+                                    "configuration",
+                                    "sinks"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "osType": {
+                            "description": "Operating system type for the configuration",
+                            "enum": [
+                                "Windows",
+                                "Linux"
+                            ],
+                            "type": "string"
+                        },
+                        "proxySetting": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
